@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-orange: var(--orange);
+  --color-muted: var(--muted);
+  --color-cardBg: var(--card-bg);
+  --color-border: var(--border);
+  --color-navBg: var(--nav-bg);
+
+  --font-inter: 'Inter', sans-serif;
+  --font-space: 'Space Grotesk', sans-serif;
+}
+
+@layer base {
+  :root {
+    --bg: #faf8f3;
+    --text: #111111;
+    --orange: #FF4D00;
+    --muted: #888888;
+    --card-bg: #f3f0e8;
+    --border: #e8e3da;
+    --nav-bg: rgba(250, 248, 243, 0.75);
+    --grid-line: rgba(180, 170, 155, 0.18);
+  }
+  
+  .dark {
+    --bg: #111111;
+    --text: #F0EDE6;
+    --card-bg: #1C1C1C;
+    --border: #2A2A2A;
+    --nav-bg: rgba(17, 17, 17, 0.75);
+    --muted: #888888;
+    --grid-line: rgba(255, 255, 255, 0.04);
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-inter);
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+    
+    /* Grid background — barely visible, fixed while scrolling */
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+  }
+}

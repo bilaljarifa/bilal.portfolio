@@ -1,0 +1,29 @@
+[
+  {
+    "title": "DreamWeb — Telephony Manager",
+    "description": "A full web-based telephony management application with complete CRUD operations for managing phone lines, users, and telephony records. Built as final year project.",
+    "techStack": ["Laravel", "PHP", "MySQL", "JavaScript"],
+    "github": "https://github.com/bilaljarifa",
+    "live": "#",
+    "image": "📞",
+    "bgColor": "linear-gradient(135deg, #0d1829, #1a2540)"
+  },
+  {
+    "title": "Ibn Tofail University App",
+    "description": "Academic workflow management application with secure authentication, PDF generation, CRUD features, and bilingual support (English/French). Built during internship.",
+    "techStack": ["Laravel", "PHP", "Livewire", "MySQL", "JavaScript"],
+    "github": "https://github.com/bilaljarifa",
+    "live": "#",
+    "image": "🎓",
+    "bgColor": "linear-gradient(135deg, #0d1f0d, #1a3a1a)"
+  },
+  {
+    "title": "Personal Portfolio",
+    "description": "This very portfolio website — a modern, animated, dark-themed developer portfolio with 3D effects, particle animations, dynamic skill & project loading from JSON.",
+    "techStack": ["HTML5", "CSS3", "JavaScript", "Canvas API"],
+    "github": "https://github.com/bilaljarifa",
+    "live": "#",
+    "image": "🚀",
+    "bgColor": "linear-gradient(135deg, #1a0d29, #2d1a40)"
+  }
+]
