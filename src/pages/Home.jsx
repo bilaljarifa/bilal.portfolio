@@ -20,13 +20,7 @@ const Hero = () => {
     <section className="min-h-[88vh] px-6 md:px-12 pt-40 pb-20 grid md:grid-cols-[1fr_340px] items-center gap-12 max-w-7xl mx-auto">
       <div>
         <div className="flex flex-col leading-none">
-          <span className="font-space text-[clamp(3.5rem,7vw,6.5rem)] font-bold text-orange tracking-tight">
-            REACT /
-          </span>
-          <span className="font-space text-[clamp(3.5rem,7vw,6.5rem)] font-bold text-text tracking-tight">
-            NODE.JS
-          </span>
-          <span className="font-space text-[clamp(3.5rem,7.5vw,7.2rem)] font-bold text-text tracking-tight -mt-2">
+          <span className="font-space text-[clamp(3.5rem,7.5vw,7.2rem)] font-bold text-orange tracking-tight">
             FULL STACK
           </span>
           <span className="font-space text-[clamp(3.5rem,7.5vw,7.2rem)] font-bold text-text tracking-tight -mt-2">
