@@ -26,7 +26,10 @@ const Hero = () => {
           <span className="font-space text-[clamp(3.5rem,7vw,6.5rem)] font-bold text-text tracking-tight">
             NODE.JS
           </span>
-          <span className="font-space text-[clamp(4rem,9vw,9rem)] font-bold text-text tracking-tight -mt-2">
+          <span className="font-space text-[clamp(3.5rem,7.5vw,7.2rem)] font-bold text-text tracking-tight -mt-2">
+            FULL STACK
+          </span>
+          <span className="font-space text-[clamp(3.5rem,7.5vw,7.2rem)] font-bold text-text tracking-tight -mt-2">
             DEVELOPER
           </span>
         </div>
