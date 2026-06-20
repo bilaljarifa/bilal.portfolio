@@ -35,48 +35,48 @@ const AnimatedCat = () => {
         <g className="cat-tail">
           <path
             d="M 135 195 C 168 188, 190 160, 182 128 C 175 100, 155 95, 148 112"
-            stroke="#1a1a2e"
+            stroke="#0c0c0e"
             strokeWidth="18"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
           />
           {/* tail tip — slightly lighter */}
-          <circle cx="148" cy="113" r="10" fill="#2e2e4a" />
+          <circle cx="148" cy="113" r="10" fill="#1a1a1f" />
         </g>
 
         {/* ── BODY + HEAD GROUP ── */}
         <g>
 
           {/* Body */}
-          <ellipse cx="105" cy="185" rx="52" ry="48" fill="#1a1a2e" />
+          <ellipse cx="105" cy="185" rx="52" ry="48" fill="#0c0c0e" />
 
           {/* Front paws */}
-          <ellipse cx="80"  cy="226" rx="16" ry="9" fill="#1a1a2e" />
-          <ellipse cx="130" cy="226" rx="16" ry="9" fill="#1a1a2e" />
+          <ellipse cx="80"  cy="226" rx="16" ry="9" fill="#0c0c0e" />
+          <ellipse cx="130" cy="226" rx="16" ry="9" fill="#0c0c0e" />
           {/* paw toe lines */}
-          <line x1="74"  y1="229" x2="74"  y2="233" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
-          <line x1="80"  y1="230" x2="80"  y2="234" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
-          <line x1="86"  y1="229" x2="86"  y2="233" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
-          <line x1="124" y1="229" x2="124" y2="233" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
-          <line x1="130" y1="230" x2="130" y2="234" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
-          <line x1="136" y1="229" x2="136" y2="233" stroke="#2e2e4a" strokeWidth="2" strokeLinecap="round" />
+          <line x1="74"  y1="229" x2="74"  y2="233" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
+          <line x1="80"  y1="230" x2="80"  y2="234" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
+          <line x1="86"  y1="229" x2="86"  y2="233" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
+          <line x1="124" y1="229" x2="124" y2="233" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
+          <line x1="130" y1="230" x2="130" y2="234" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
+          <line x1="136" y1="229" x2="136" y2="233" stroke="#1a1a1f" strokeWidth="2" strokeLinecap="round" />
 
           {/* Neck */}
-          <ellipse cx="105" cy="143" rx="32" ry="18" fill="#1a1a2e" />
+          <ellipse cx="105" cy="143" rx="32" ry="18" fill="#0c0c0e" />
 
           {/* Head */}
-          <ellipse cx="105" cy="112" rx="44" ry="42" fill="#1a1a2e" />
+          <ellipse cx="105" cy="112" rx="44" ry="42" fill="#0c0c0e" />
 
           {/* Left Ear (outer) */}
-          <polygon points="68,90 58,52 90,76" fill="#1a1a2e" />
+          <polygon points="68,90 58,52 90,76" fill="#0c0c0e" />
           {/* Left Ear (inner) */}
-          <polygon points="70,86 63,58 86,76" fill="#2e1a2e" />
+          <polygon points="70,86 63,58 86,76" fill="#1b121c" />
 
           {/* Right Ear (outer) */}
-          <polygon points="142,90 152,52 120,76" fill="#1a1a2e" />
+          <polygon points="142,90 152,52 120,76" fill="#0c0c0e" />
           {/* Right Ear (inner) */}
-          <polygon points="140,86 147,58 124,76" fill="#2e1a2e" />
+          <polygon points="140,86 147,58 124,76" fill="#1b121c" />
 
           {/* ── FACE ── */}
 
@@ -85,13 +85,13 @@ const AnimatedCat = () => {
             {/* Left eye white glow */}
             <ellipse cx="88" cy="110" rx="9"  ry="10" fill="#e8d44d" />
             {/* Left pupil (vertical slit) */}
-            <ellipse cx="88" cy="110" rx="3.5" ry="8" fill="#0d0d1a" />
+            <ellipse cx="88" cy="110" rx="3.5" ry="8" fill="#050508" />
             {/* Left eye shine */}
             <circle  cx="91" cy="106" r="2" fill="white" opacity="0.8" />
 
             {/* Right eye */}
             <ellipse cx="122" cy="110" rx="9"  ry="10" fill="#e8d44d" />
-            <ellipse cx="122" cy="110" rx="3.5" ry="8" fill="#0d0d1a" />
+            <ellipse cx="122" cy="110" rx="3.5" ry="8" fill="#050508" />
             <circle  cx="125" cy="106" r="2" fill="white" opacity="0.8" />
           </g>
 
@@ -103,17 +103,17 @@ const AnimatedCat = () => {
           <path d="M 105 129 C 110 134, 116 133, 118 131" stroke="#e879b0" strokeWidth="1.5" strokeLinecap="round" fill="none" />
 
           {/* Whiskers left */}
-          <line x1="90" y1="122" x2="54" y2="118" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
-          <line x1="90" y1="126" x2="54" y2="126" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
-          <line x1="90" y1="130" x2="56" y2="134" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="90" y1="122" x2="54" y2="118" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="90" y1="126" x2="54" y2="126" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="90" y1="130" x2="56" y2="134" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
 
           {/* Whiskers right */}
-          <line x1="120" y1="122" x2="156" y2="118" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
-          <line x1="120" y1="126" x2="156" y2="126" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
-          <line x1="120" y1="130" x2="154" y2="134" stroke="#4a4a6a" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="120" y1="122" x2="156" y2="118" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="120" y1="126" x2="156" y2="126" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
+          <line x1="120" y1="130" x2="154" y2="134" stroke="#353540" strokeWidth="1.2" strokeLinecap="round" opacity="0.7" />
 
           {/* Belly highlight */}
-          <ellipse cx="105" cy="185" rx="24" ry="28" fill="#24243e" opacity="0.5" />
+          <ellipse cx="105" cy="185" rx="24" ry="28" fill="#151518" opacity="0.5" />
         </g>
       </svg>
     </div>
