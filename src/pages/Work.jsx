@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProjectBrief from '../components/ProjectBrief';
 import ProjectGallery from '../components/ProjectGallery';
+import TechnologyStack from '../components/TechnologyStack';
 import { academicProjects } from '../data/academicProjects';
 import { ouchenGallery } from '../data/ouchenGallery';
 import studentManagerCover from '../assets/projects/student-manager.jpg';
@@ -13,7 +14,7 @@ const projects = [
   {
     id: 'ouchen-store',
     ...ouchenProject.en,
-    tags: ['React', 'Vite', 'Tailwind CSS'],
+    tags: ['JavaScript', 'React', 'Vite', 'Tailwind CSS'],
     year: '2026',
     cover: ouchenStoreCover,
     demo: 'https://ri7.netlify.app/',
@@ -22,7 +23,7 @@ const projects = [
   {
     id: 'student-manager',
     ...academicProjects['student-manager'].en,
-    tags: ['JavaScript', 'Node.js', 'MongoDB', 'PHP', 'MySQL'],
+    tags: ['JavaScript', 'Node.js', 'Express', 'MongoDB', 'PHP', 'MySQL'],
     cover: studentManagerCover,
     demo: 'https://studentmanager01.great-site.net/login.php',
     link: 'https://github.com/bilaljarifa/Student-Manager-js',
@@ -30,7 +31,7 @@ const projects = [
   {
     id: 'doctoral-portal',
     ...academicProjects['doctoral-portal'].en,
-    tags: ['Laravel', 'Livewire', 'MySQL'],
+    tags: ['PHP', 'Laravel', 'Livewire', 'MySQL'],
     cover: doctoralPortalCover,
     link: 'https://github.com/bilaljarifa/plateforme_doctorale',
   },
@@ -58,7 +59,7 @@ const projects = [
   {
     title: 'Portfolio Website',
     desc: 'This very portfolio — built with React, Vite, and Tailwind CSS with dark mode support.',
-    tags: ['React', 'Tailwind', 'Vite'],
+    tags: ['React', 'Tailwind CSS', 'Vite'],
     year: '2026',
     link: '#',
   },
@@ -126,6 +127,7 @@ const Work = () => {
         <header className="mt-5 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
           <h1 className="font-space text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight">{selected.title}</h1>
           <ProjectActions project={selected} />
+          <TechnologyStack className="w-full" technologies={selected.tags} />
         </header>
         <div className={gallery ? 'mt-7' : 'mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]'}>
           <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
@@ -190,16 +192,7 @@ const Work = () => {
               )}
             </h2>
             <p className="text-muted text-sm leading-relaxed flex-1">{project.description ?? project.desc}</p>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-border/50 text-xs font-medium text-muted"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <TechnologyStack className="mt-2" technologies={project.tags} />
             {project.id && <ProjectActions project={project} showBrief />}
           </article>
         ))}
