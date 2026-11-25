@@ -4,6 +4,7 @@ import ProjectBrief from '../components/ProjectBrief';
 import ProjectGallery from '../components/ProjectGallery';
 import TechnologyStack from '../components/TechnologyStack';
 import { academicProjects } from '../data/academicProjects';
+import { cvProjects } from '../data/cvProjects';
 import { ouchenGallery } from '../data/ouchenGallery';
 import studentManagerCover from '../assets/projects/student-manager.jpg';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
@@ -36,46 +37,25 @@ const projects = [
     link: 'https://github.com/bilaljarifa/plateforme_doctorale',
   },
   {
-    title: 'AI Chat App',
-    desc: 'A real-time chat application powered by AI. Built with React, Node.js, and WebSockets.',
-    tags: ['React', 'Node.js', 'WebSockets', 'AI'],
+    id: 'optiport',
+    ...cvProjects.optiport.en,
+    link: cvProjects.optiport.link,
+    tags: cvProjects.optiport.stack,
     year: '2026',
-    link: '#',
   },
   {
-    title: 'E-Commerce Platform',
-    desc: 'Full-stack e-commerce solution with product management, cart, and payment integration.',
-    tags: ['Laravel', 'MySQL', 'React', 'Stripe'],
-    year: '2025',
-    link: '#',
+    id: 'transmanage',
+    ...cvProjects.transmanage.en,
+    link: cvProjects.transmanage.link,
+    tags: cvProjects.transmanage.stack,
   },
   {
-    title: 'FastAPI ML Service',
-    desc: 'A machine learning inference API built with FastAPI and Python, deployed on Docker.',
-    tags: ['Python', 'FastAPI', 'Docker', 'ML'],
-    year: '2025',
-    link: '#',
-  },
-  {
-    title: 'Portfolio Website',
-    desc: 'This very portfolio — built with React, Vite, and Tailwind CSS with dark mode support.',
-    tags: ['React', 'Tailwind CSS', 'Vite'],
-    year: '2026',
-    link: '#',
-  },
-  {
-    title: 'Task Management App',
-    desc: 'A Kanban-style task manager with drag & drop, teams, and real-time sync.',
-    tags: ['React', 'Node.js', 'MongoDB'],
-    year: '2024',
-    link: '#',
-  },
-  {
-    title: 'Fiverr Freelance Projects',
-    desc: 'Various client projects delivered on Fiverr — web apps, APIs, and automation scripts.',
-    tags: ['Various', 'Freelance'],
-    year: '2023–2026',
-    link: '#',
+    id: 'cv-builder',
+    title: 'CV Builder',
+    description: 'A résumé manager for creating and editing CVs, with PDF export.',
+    brief: 'CV Builder provides a web interface for creating, editing, and organizing résumé records. It stores the CVs in MySQL and exports finished documents as PDFs for sharing.',
+    tags: ['PHP', 'MySQL'],
+    link: 'https://github.com/bilaljarifa/cv-builder',
   },
 ];
 
@@ -119,6 +99,7 @@ const Work = () => {
 
   if (selected) {
     const gallery = selected.id === 'ouchen-store' ? ouchenGallery('en') : null;
+    const showCover = Boolean(selected.cover && !gallery);
     return (
       <article className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
         <Link to="/work" className="inline-block text-sm font-semibold text-muted underline-offset-4 hover:text-orange hover:underline">
@@ -129,9 +110,9 @@ const Work = () => {
           <ProjectActions project={selected} />
           <TechnologyStack className="w-full" technologies={selected.tags} />
         </header>
-        <div className={gallery ? 'mt-7' : 'mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]'}>
+        <div className={showCover ? 'mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]' : 'mt-7'}>
           <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
-          {!gallery && <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-contain" />}
+          {showCover && <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-contain" />}
         </div>
         {gallery && <ProjectGallery className="mt-9" heading="Ouchen Store gallery" groups={gallery} labels={galleryLabels} />}
       </article>
@@ -187,13 +168,11 @@ const Work = () => {
               />
             )}
             <h2 className="font-space text-xl font-bold group-hover:text-orange transition-colors">
-              {project.id ? project.title : (
-                <a href={project.link} className="after:absolute after:inset-0">{project.title}</a>
-              )}
+              {project.title}
             </h2>
-            <p className="text-muted text-sm leading-relaxed flex-1">{project.description ?? project.desc}</p>
+            <p className="text-muted text-sm leading-relaxed flex-1">{project.description}</p>
             <TechnologyStack className="mt-2" technologies={project.tags} />
-            {project.id && <ProjectActions project={project} showBrief />}
+            <ProjectActions project={project} showBrief />
           </article>
         ))}
       </div>

@@ -4,6 +4,7 @@ import { FaReact, FaNodeJs, FaPython, FaLaravel } from 'react-icons/fa6';
 import { SiFastapi, SiMongodb } from 'react-icons/si';
 import profilePhoto from '../../images/profile.png';
 import ResumeLink from '../components/ResumeLink';
+import { profileCopy } from '../data/profile';
 
 const technologies = [
   { name: 'React', icon: FaReact, color: 'text-[#61DAFB]' },
@@ -29,12 +30,7 @@ const Hero = () => {
           </span>
         </div>
 
-        <div className="mt-8 text-base text-muted leading-relaxed max-w-xl">
-          <strong className="text-orange font-semibold">Full Stack Developer</strong> &amp;{' '}
-          <strong className="text-orange font-semibold">Freelancer</strong> — building fast,
-          clean web apps with modern tech. Student at UIR · Fiverr freelancer · Open to
-          opportunities.
-        </div>
+        <p className="mt-8 max-w-xl text-base leading-relaxed text-text/80">{profileCopy.en.intro}</p>
 
         <div className="flex flex-wrap gap-3 mt-6">
           {technologies.map((tech) => {

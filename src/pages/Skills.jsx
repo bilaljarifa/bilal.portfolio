@@ -1,89 +1,70 @@
-import React from 'react';
+import { useState } from 'react';
+import { skillGroups } from '../data/skills';
+import { profileCopy } from '../data/profile';
+import './Skills.css';
 
-const skillGroups = [
-  {
-    category: 'Frontend',
-    skills: [
-      { name: 'React', level: 90 },
-      { name: 'JavaScript', level: 88 },
-      { name: 'HTML & CSS', level: 95 },
-      { name: 'Tailwind CSS', level: 85 },
-    ],
-  },
-  {
-    category: 'Backend',
-    skills: [
-      { name: 'Node.js', level: 82 },
-      { name: 'FastAPI (Python)', level: 78 },
-      { name: 'Laravel (PHP)', level: 70 },
-      { name: 'REST APIs', level: 88 },
-    ],
-  },
-  {
-    category: 'Data & Tools',
-    skills: [
-      { name: 'MongoDB', level: 80 },
-      { name: 'MySQL', level: 75 },
-      { name: 'Git & GitHub', level: 90 },
-      { name: 'Docker (basics)', level: 55 },
-    ],
-  },
-];
+const Skills = ({ language = 'en' }) => {
+  const copy = profileCopy[language].skills;
+  const [activeCategory, setActiveCategory] = useState(null);
+  const visibleGroups = activeCategory
+    ? skillGroups.filter(({ category }) => category === activeCategory)
+    : skillGroups;
 
-const techBadges = [
-  'React', 'Node.js', 'Python', 'FastAPI', 'Laravel', 'MongoDB',
-  'MySQL', 'Tailwind CSS', 'Git', 'REST APIs', 'Docker', 'Figma',
-];
-
-const Skills = () => {
   return (
-    <section className="pt-40 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="text-xs font-bold tracking-[0.2em] uppercase text-orange mb-4">
-        What I Work With
-      </div>
-      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight mb-16">
-        My Skills
+    <section className="px-6 pt-32 pb-16 md:px-12 md:pt-40 max-w-7xl mx-auto">
+      <h1 className="mb-8 font-space text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-tight tracking-tight">
+        {copy.heading}
       </h1>
 
-      {/* Skill bars */}
-      <div className="grid md:grid-cols-3 gap-12 mb-20">
-        {skillGroups.map((group) => (
-          <div key={group.category}>
-            <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-6">
-              {group.category}
-            </h2>
-            <div className="flex flex-col gap-5">
-              {group.skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex justify-between text-sm font-medium mb-1.5">
-                    <span>{skill.name}</span>
-                    <span className="text-muted">{skill.level}%</span>
-                  </div>
-                  <div className="h-1.5 rounded-full bg-border overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-orange transition-all duration-700"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Tech badges */}
-      <div className="border-t border-border pt-12">
-        <h2 className="font-space text-xl font-bold mb-8">Technologies I Use</h2>
-        <div className="flex flex-wrap gap-3">
-          {techBadges.map((tech) => (
-            <span
-              key={tech}
-              className="px-5 py-2 rounded-full border-[1.5px] border-border text-sm font-medium text-muted hover:border-orange hover:text-orange transition-colors cursor-default"
+      <div className="grid items-start gap-5 lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-10">
+        <div
+          role="group"
+          aria-label={copy.filter}
+          className="flex flex-wrap gap-x-2 gap-y-1 lg:sticky lg:top-28 lg:grid"
+        >
+          {skillGroups.map(({ category }) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory((current) => current === category ? null : category)}
+              aria-pressed={activeCategory === category}
+              aria-controls="skill-groups"
+              className="skill-filter cursor-pointer px-2.5 py-2.5 text-left text-sm font-medium text-text/75 lg:px-4"
             >
-              {tech}
-            </span>
+              {copy.categories[category]}
+            </button>
           ))}
+        </div>
+
+        <div id="skill-groups" className="min-w-0 border-y border-border">
+          <div key={activeCategory} className="divide-y divide-border">
+            {visibleGroups.map(({ category, icon: GroupIcon, skills }, index) => (
+              <section
+                key={category}
+                className="skill-group grid gap-3 py-5 sm:py-6 xl:grid-cols-[10.5rem_minmax(0,1fr)] xl:gap-6"
+                style={{ '--skill-row-delay': `${index * 35}ms` }}
+              >
+                <h2 className="flex items-center gap-2 self-start font-space text-base font-bold xl:min-h-10">
+                  <GroupIcon size={15} className="shrink-0 text-orange" aria-hidden="true" />
+                  {copy.categories[category]}
+                </h2>
+
+                <ul role="list" className="grid grid-cols-2 gap-x-3 gap-y-2 sm:grid-cols-3 xl:grid-cols-4">
+                  {skills.map(({ name, icon: SkillIcon, color }) => (
+                    <li key={name} className="skill-item flex min-w-0 items-center gap-2 py-1 text-sm font-medium leading-tight">
+                      <span
+                        className="skill-icon flex size-8 shrink-0 items-center justify-center rounded-lg"
+                        style={{ '--skill-icon-color': color }}
+                      >
+                        <SkillIcon size={18} aria-hidden="true" />
+                      </span>
+                      <span>{copy.names[name] ?? name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
       </div>
     </section>

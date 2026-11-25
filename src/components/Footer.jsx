@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from 'react-icons/fa6';
+import { useEffect, useRef, useState } from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa6';
 import AnimatedCat from './AnimatedCat';
+import { profileContact, profileCopy } from '../data/profile';
 
-const Footer = () => {
+const Footer = ({ language = 'en' }) => {
+  const copy = profileCopy[language];
   const [isVisible, setIsVisible] = useState(false);
   const footerRef = useRef(null);
 
@@ -12,7 +14,7 @@ const Footer = () => {
       { threshold: 0.1 }
     );
     if (footerRef.current) observer.observe(footerRef.current);
-    return () => { if (footerRef.current) observer.unobserve(footerRef.current); };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -34,17 +36,16 @@ const Footer = () => {
 
         {/* Bottom row — tight spacing */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-3 pt-4">
-          <p className="text-xs text-muted">Kénitra, Morocco 🇲🇦</p>
+          <p className="text-xs text-muted">{copy.country}</p>
 
           <div className="flex items-center gap-5">
             {[
-              { href: 'https://github.com/bilaljarifa', icon: <FaGithub size={17} />, label: 'GitHub', external: true },
-              { href: '#', icon: <FaLinkedin size={17} />, label: 'LinkedIn' },
-              { href: '#', icon: <FaXTwitter size={17} />, label: 'X / Twitter' },
-              { href: 'mailto:bilal@email.com', icon: <FaEnvelope size={17} />, label: 'Email' },
+              { href: profileContact.github, icon: <FaGithub size={17} />, label: 'GitHub', external: true },
+              { href: profileContact.linkedin, icon: <FaLinkedin size={17} />, label: 'LinkedIn', external: true },
+              { href: `mailto:${profileContact.email}`, icon: <FaEnvelope size={17} />, label: copy.contact.email },
             ].map(({ href, icon, label, external }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 aria-label={label}
                 {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}

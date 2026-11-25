@@ -1,90 +1,39 @@
-import React from 'react';
+import TechnologyStack from '../components/TechnologyStack';
+import { education, professionalExperience, profileCopy } from '../data/profile';
 
-const experiences = [
-  {
-    role: 'Freelance Full Stack Developer',
-    company: 'Fiverr',
-    period: '2023 – Present',
-    type: 'Freelance',
-    desc: 'Delivered 10+ client projects including web apps, REST APIs, and automation scripts. Maintained a top-rated profile with 5-star reviews.',
-    tags: ['React', 'Node.js', 'Python', 'APIs'],
-  },
-  {
-    role: 'Computer Engineering Student',
-    company: 'UIR — Université Internationale de Rabat',
-    period: '2024 – Present',
-    type: 'Education',
-    desc: 'Pursuing a Professional License in Computer Engineering. Coursework includes algorithms, databases, software engineering, and web development.',
-    tags: ['Algorithms', 'Databases', 'Software Engineering'],
-  },
-  {
-    role: 'Self-Taught Developer',
-    company: 'Independent',
-    period: '2022 – 2024',
-    type: 'Learning',
-    desc: 'Built a solid foundation through online courses, personal projects, and open-source contributions. Mastered React, Node.js, and Python.',
-    tags: ['React', 'Node.js', 'Python', 'Self-Learning'],
-  },
-];
-
-const typeColors = {
-  Freelance: 'text-orange border-orange bg-orange/5',
-  Education: 'text-blue-500 border-blue-500 bg-blue-500/5',
-  Learning: 'text-green-500 border-green-500 bg-green-500/5',
-};
-
-const Experience = () => {
+function TimelineSection({ heading, items, language, stackLabel }) {
   return (
-    <section className="pt-40 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="text-xs font-bold tracking-[0.2em] uppercase text-orange mb-4">
-        Background
-      </div>
-      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight mb-16">
-        Experience
-      </h1>
-
-      <div className="flex flex-col gap-6">
-        {experiences.map((exp, i) => (
-          <div
-            key={i}
-            className="group p-8 rounded-2xl border-[1.5px] border-border bg-cardBg hover:border-orange transition-all duration-300"
-          >
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+    <section className="mt-10">
+      <h2 className="mb-4 font-space text-2xl font-bold">{heading}</h2>
+      <div className="grid gap-4">
+        {items.map((item) => (
+          <article key={item.id} className="rounded-2xl border border-border bg-cardBg p-5 sm:p-7">
+            <div className="flex flex-wrap items-start justify-between gap-x-5 gap-y-2">
               <div>
-                <h2 className="font-space text-xl font-bold group-hover:text-orange transition-colors">
-                  {exp.role}
-                </h2>
-                <p className="text-muted font-medium mt-1">{exp.company}</p>
+                <h3 className="font-space text-xl font-bold">{item.title[language]}</h3>
+                {item.organization && (
+                  <p className="mt-1 text-sm text-text/70">{item.organization} · {item.place[language]}</p>
+                )}
               </div>
-              <div className="flex items-center gap-3 shrink-0">
-                <span
-                  className={`px-3 py-1 rounded-full border text-xs font-bold ${typeColors[exp.type]}`}
-                >
-                  {exp.type}
-                </span>
-                <span className="text-sm text-muted font-medium whitespace-nowrap">
-                  {exp.period}
-                </span>
-              </div>
+              <p className="text-sm font-semibold text-text/75">{item.period[language]}</p>
             </div>
-
-            <p className="text-muted leading-relaxed mb-5">{exp.desc}</p>
-
-            <div className="flex flex-wrap gap-2">
-              {exp.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-border/50 text-xs font-medium text-muted"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+            {item.summary && <p className="mt-3 max-w-3xl text-sm leading-relaxed text-text/80 sm:text-base">{item.summary[language]}</p>}
+            {item.stack && <TechnologyStack className="mt-4" technologies={item.stack} label={stackLabel} />}
+          </article>
         ))}
       </div>
     </section>
   );
-};
+}
 
-export default Experience;
+export default function Experience({ language = 'en' }) {
+  const copy = profileCopy[language].experience;
+
+  return (
+    <div className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:px-12 md:pt-40">
+      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight">{copy.heading}</h1>
+      <TimelineSection heading={copy.work} items={professionalExperience} language={language} stackLabel={copy.stack} />
+      <TimelineSection heading={copy.education} items={education} language={language} />
+    </div>
+  );
+}

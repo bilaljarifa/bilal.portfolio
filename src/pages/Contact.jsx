@@ -1,146 +1,54 @@
-import React, { useState } from 'react';
-import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6';
+import { useState } from 'react';
+import { ArrowUpRight, Mail, Phone } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa6';
+import { profileContact, profileCopy } from '../data/profile';
 
-const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+const fieldClass = 'block w-full rounded-xl border border-border bg-cardBg px-4 py-3 text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange';
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+export default function Contact({ language = 'en' }) {
+  const copy = profileCopy[language].contact;
+  const [draftOpened, setDraftOpened] = useState(false);
+  const links = [
+    { label: copy.email, text: profileContact.email, href: `mailto:${profileContact.email}`, Icon: Mail },
+    { label: copy.phone, text: profileContact.phone, href: profileContact.phoneHref, Icon: Phone },
+    { label: 'GitHub', text: 'bilaljarifa', href: profileContact.github, Icon: FaGithub, external: true },
+    { label: 'LinkedIn', text: profileContact.name, href: profileContact.linkedin, Icon: FaLinkedin, external: true },
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In production you'd POST to a backend or use EmailJS
-    setSent(true);
-  };
+  function openDraft(event) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const subject = encodeURIComponent(`${copy.subject} ${form.get('name')}`);
+    const body = encodeURIComponent(`${form.get('message')}\n\n${form.get('name')}\n${form.get('email')}`);
+    setDraftOpened(true);
+    window.location.href = `mailto:${profileContact.email}?subject=${subject}&body=${body}`;
+  }
 
   return (
-    <section className="pt-40 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="text-xs font-bold tracking-[0.2em] uppercase text-orange mb-4">
-        Get In Touch
-      </div>
-      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight mb-4">
-        Let's Work Together
-      </h1>
-      <p className="text-muted text-lg max-w-xl mb-16">
-        Have a project in mind? Whether it's a web app, freelance gig, or just a chat — I'm
-        always open.
-      </p>
-
-      <div className="grid md:grid-cols-[1fr_400px] gap-16 items-start">
-        {/* Contact form */}
-        {!sent ? (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <div>
-              <label className="block text-sm font-semibold mb-2">Your Name</label>
-              <input
-                type="text"
-                name="name"
-                required
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Bilal Jarifa"
-                className="w-full px-5 py-3.5 rounded-xl border-[1.5px] border-border bg-cardBg focus:outline-none focus:border-orange text-text placeholder:text-muted transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold mb-2">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-                placeholder="hello@example.com"
-                className="w-full px-5 py-3.5 rounded-xl border-[1.5px] border-border bg-cardBg focus:outline-none focus:border-orange text-text placeholder:text-muted transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold mb-2">Message</label>
-              <textarea
-                name="message"
-                required
-                rows={5}
-                value={form.message}
-                onChange={handleChange}
-                placeholder="Tell me about your project..."
-                className="w-full px-5 py-3.5 rounded-xl border-[1.5px] border-border bg-cardBg focus:outline-none focus:border-orange text-text placeholder:text-muted transition-colors resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              className="self-start px-8 py-3.5 rounded-full bg-orange text-white font-semibold text-sm hover:bg-orange/90 transition-colors"
-            >
-              Send Message ↗
-            </button>
-          </form>
-        ) : (
-          <div className="p-10 rounded-2xl border-[1.5px] border-orange bg-orange/5 text-center">
-            <div className="text-4xl mb-4">🎉</div>
-            <h2 className="font-space text-2xl font-bold text-orange mb-2">Message Sent!</h2>
-            <p className="text-muted">Thanks for reaching out. I'll get back to you soon.</p>
-          </div>
-        )}
-
-        {/* Contact info sidebar */}
-        <div className="flex flex-col gap-8">
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-muted mb-2">Email</p>
-            <a
-              href="mailto:bilal@email.com"
-              className="text-xl font-semibold hover:text-orange transition-colors"
-            >
-              bilal@email.com
-            </a>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-muted mb-2">
-              Location
-            </p>
-            <p className="text-xl font-semibold">Kénitra, Morocco 🇲🇦</p>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-muted mb-4">
-              Social
-            </p>
-            <div className="flex gap-5">
-              <a
-                href="https://github.com/bilaljarifa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full border-[1.5px] border-border hover:border-orange hover:text-orange transition-colors"
-              >
-                <FaGithub size={20} />
+    <section className="mx-auto max-w-7xl px-6 pb-20 pt-32 md:px-12 md:pt-40">
+      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight">{copy.heading}</h1>
+      <p className="mt-3 max-w-xl text-lg text-text/75">{copy.intro}</p>
+      <div className="mt-8 grid max-w-5xl items-start gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,.75fr)]">
+        <form onSubmit={openDraft} className="grid gap-4 rounded-2xl border border-border bg-cardBg p-5 sm:p-6">
+          <label className="grid gap-1.5 text-sm font-semibold">{copy.name}<input name="name" autoComplete="name" className={fieldClass} required /></label>
+          <label className="grid gap-1.5 text-sm font-semibold">{copy.emailAddress}<input name="email" type="email" autoComplete="email" className={fieldClass} required /></label>
+          <label className="grid gap-1.5 text-sm font-semibold">{copy.message}<textarea name="message" rows="5" className={fieldClass} required /></label>
+          <button type="submit" className="inline-flex w-fit items-center gap-2 rounded-full bg-orange px-5 py-3 text-sm font-semibold text-white hover:bg-orange/90">
+            {copy.send}<ArrowUpRight size={16} aria-hidden="true" />
+          </button>
+          {draftOpened && <p role="status" className="text-sm text-text/75">{copy.draft}</p>}
+        </form>
+        <ul role="list" className="grid gap-3">
+          {links.map(({ label, text, href, Icon, external }) => (
+            <li key={href}>
+              <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="flex items-center gap-3 rounded-xl border border-border bg-cardBg px-4 py-3 hover:border-orange">
+                <Icon size={19} className="shrink-0 text-orange" aria-hidden="true" />
+                <span className="min-w-0"><span className="block text-xs font-semibold text-text/70">{label}</span><span className="break-all text-sm font-medium">{text}</span></span>
               </a>
-              <a
-                href="#"
-                className="p-3 rounded-full border-[1.5px] border-border hover:border-orange hover:text-orange transition-colors"
-              >
-                <FaLinkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="p-3 rounded-full border-[1.5px] border-border hover:border-orange hover:text-orange transition-colors"
-              >
-                <FaXTwitter size={20} />
-              </a>
-            </div>
-          </div>
-
-          <div className="p-6 rounded-2xl border-[1.5px] border-border bg-cardBg">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-sm font-semibold">Available for work</span>
-            </div>
-            <p className="text-sm text-muted">Open to freelance & full-time opportunities.</p>
-          </div>
-        </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

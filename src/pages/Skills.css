@@ -1,0 +1,61 @@
+.skill-filter {
+  border: 0 solid transparent;
+  border-bottom-width: 2px;
+}
+
+.skill-filter:hover,
+.skill-filter[aria-pressed="true"] {
+  color: var(--text);
+}
+
+.skill-filter[aria-pressed="true"] {
+  border-color: var(--orange);
+}
+
+.skill-filter:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.skill-icon {
+  background-color: color-mix(in srgb, var(--skill-icon-color, var(--text)) 9%, var(--bg));
+  color: color-mix(in srgb, var(--skill-icon-color, var(--text)) 78%, var(--text));
+}
+
+@media (min-width: 64rem) {
+  .skill-filter {
+    border-bottom-width: 0;
+    border-inline-start-width: 2px;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  .skill-filter:hover,
+  .skill-filter[aria-pressed="true"] {
+    background-color: var(--card-bg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skill-group {
+    animation: skill-row-enter 280ms ease-out var(--skill-row-delay) both;
+  }
+
+  .skill-filter {
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  }
+
+  .skill-icon {
+    transition: transform 180ms ease;
+  }
+
+  .skill-item:hover .skill-icon {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes skill-row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

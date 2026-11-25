@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 const translations = {
   en: {
     heading: 'Projects at a glance',
-    summary: 'My work spans online retail, school management, and academic platforms. Explore the project briefs, the technologies I used, and the available demos.',
+    summary: 'My projects include ETF portfolio analysis, logistics management, and web applications for education and retail. Explore the briefs, technologies, and demos.',
     link: 'Explore projects',
   },
   fr: {
     heading: 'Mes projets en bref',
-    summary: 'Mes projets couvrent le commerce en ligne, la gestion scolaire et le suivi doctoral. Découvrez mes réalisations, les technologies utilisées et les démos disponibles.',
+    summary: 'Mes projets couvrent l’analyse de portefeuilles ETF, la gestion logistique et des applications web pour l’enseignement et le commerce. Découvrez les présentations, les technologies et les démos.',
     link: 'Voir les projets',
   },
 };
