@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ProjectOverview from './components/ProjectOverview';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -28,7 +29,15 @@ function App() {
         <Navbar darkMode={darkMode} toggleDarkMode={() => setDarkMode(!darkMode)} />
         <main className="flex-1">
           <Routes>
-            <Route path="/"           element={<Home />} />
+            <Route
+              path="/"
+              element={(
+                <>
+                  <Home />
+                  <ProjectOverview />
+                </>
+              )}
+            />
             <Route path="/about"      element={<About />} />
             <Route path="/skills"     element={<Skills />} />
             <Route path="/work"       element={<Work />} />
