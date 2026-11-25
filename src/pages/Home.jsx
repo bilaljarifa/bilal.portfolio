@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaReact, FaNodeJs, FaPython, FaLaravel } from 'react-icons/fa6';
 import { SiFastapi, SiMongodb } from 'react-icons/si';
 import profilePhoto from '../../images/profile.png';
+import ResumeLink from '../components/ResumeLink';
 
 const technologies = [
   { name: 'React', icon: FaReact, color: 'text-[#61DAFB]' },
@@ -50,7 +51,7 @@ const Hero = () => {
           })}
         </div>
 
-        <div className="flex gap-4 mt-10">
+        <div className="flex flex-wrap gap-4 mt-10">
           <button
             onClick={() => navigate('/work')}
             className="px-7 py-3 rounded-full bg-orange text-white font-semibold text-sm hover:bg-orange/90 transition-colors"
@@ -63,6 +64,7 @@ const Hero = () => {
           >
             Hire Me
           </button>
+          <ResumeLink />
         </div>
       </div>
 

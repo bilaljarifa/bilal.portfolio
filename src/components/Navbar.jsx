@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import ResumeLink from './ResumeLink';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 
 const navLinks = [
@@ -36,7 +37,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </NavLink>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-10">
           {navLinks.map((link) => (
             <li key={link.name}>
               <NavLink
@@ -65,7 +66,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </ul>
 
         {/* Right actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1 sm:gap-2 xl:gap-4">
           <button
             onClick={toggleDarkMode}
             className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-text"
@@ -81,9 +82,11 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             Hire Me ↗
           </NavLink>
 
+          <ResumeLink compact />
+
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-text"
+            className="lg:hidden p-2 text-text"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -93,7 +96,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="absolute top-[88px] left-4 right-4 bg-cardBg backdrop-blur-xl border border-border rounded-3xl p-6 shadow-2xl md:hidden flex flex-col gap-6">
+        <div className="absolute top-[88px] left-4 right-4 bg-cardBg backdrop-blur-xl border border-border rounded-3xl p-6 shadow-2xl lg:hidden flex flex-col gap-6">
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.name}>
