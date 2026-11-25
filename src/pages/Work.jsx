@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProjectBrief from '../components/ProjectBrief';
+import ProjectGallery from '../components/ProjectGallery';
+import { academicProjects } from '../data/academicProjects';
+import { ouchenGallery } from '../data/ouchenGallery';
+import studentManagerCover from '../assets/projects/student-manager.jpg';
+import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
 import { ouchenProject } from '../data/ouchenProject';
 import ouchenStoreCover from '../assets/projects/ouchen-store.jpg';
 
@@ -13,6 +18,21 @@ const projects = [
     cover: ouchenStoreCover,
     demo: 'https://ri7.netlify.app/',
     link: 'https://github.com/bilaljarifa/parfume_store',
+  },
+  {
+    id: 'student-manager',
+    ...academicProjects['student-manager'].en,
+    tags: ['JavaScript', 'Node.js', 'MongoDB', 'PHP', 'MySQL'],
+    cover: studentManagerCover,
+    demo: 'https://studentmanager01.great-site.net/login.php',
+    link: 'https://github.com/bilaljarifa/Student-Manager-js',
+  },
+  {
+    id: 'doctoral-portal',
+    ...academicProjects['doctoral-portal'].en,
+    tags: ['Laravel', 'Livewire', 'MySQL'],
+    cover: doctoralPortalCover,
+    link: 'https://github.com/bilaljarifa/plateforme_doctorale',
   },
   {
     title: 'AI Chat App',
@@ -58,7 +78,13 @@ const projects = [
   },
 ];
 
-const allTags = ['All', ...new Set(projects.flatMap((p) => p.tags))];
+const allTags = ['All', ...new Set(projects.flatMap((project) => project.tags))];
+const galleryLabels = {
+  previewHeading: 'Image preview',
+  previousImage: 'Previous image',
+  nextImage: 'Next image',
+  backToGallery: 'Back to gallery',
+};
 
 function ProjectActions({ project, showBrief = false }) {
   return (
@@ -68,9 +94,11 @@ function ProjectActions({ project, showBrief = false }) {
           Project Brief
         </Link>
       )}
-      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
-        Live demo <span aria-hidden="true">↗</span>
-      </a>
+      {project.demo && (
+        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
+          Live demo <span aria-hidden="true">↗</span>
+        </a>
+      )}
       <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
         GitHub <span aria-hidden="true">↗</span>
       </a>
@@ -89,6 +117,7 @@ const Work = () => {
       : projects.filter((p) => p.tags.includes(activeTag));
 
   if (selected) {
+    const gallery = selected.id === 'ouchen-store' ? ouchenGallery('en') : null;
     return (
       <article className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
         <Link to="/work" className="inline-block text-sm font-semibold text-muted underline-offset-4 hover:text-orange hover:underline">
@@ -98,10 +127,11 @@ const Work = () => {
           <h1 className="font-space text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight">{selected.title}</h1>
           <ProjectActions project={selected} />
         </header>
-        <div className="mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <div className={gallery ? 'mt-7' : 'mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]'}>
           <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
-          <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-cover" />
+          {!gallery && <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-contain" />}
         </div>
+        {gallery && <ProjectGallery className="mt-9" heading="Ouchen Store gallery" groups={gallery} labels={galleryLabels} />}
       </article>
     );
   }
@@ -139,14 +169,12 @@ const Work = () => {
             key={project.title}
             className="group relative p-7 rounded-2xl border-[1.5px] border-border bg-cardBg hover:border-orange transition-all duration-300 flex flex-col gap-4"
           >
-            <div className="flex justify-between items-start">
-              <span className="text-xs font-bold text-muted tracking-widest uppercase">
-                {project.year}
-              </span>
-              <span className="text-orange opacity-0 group-hover:opacity-100 transition-opacity text-xl">
-                ↗
-              </span>
-            </div>
+            {project.year && (
+              <div className="flex justify-between items-start">
+                <span className="text-xs font-bold text-muted tracking-widest uppercase">{project.year}</span>
+                <span aria-hidden="true" className="text-orange opacity-0 group-hover:opacity-100 transition-opacity text-xl">↗</span>
+              </div>
+            )}
             {project.cover && (
               <img
                 src={project.cover}
@@ -157,7 +185,7 @@ const Work = () => {
               />
             )}
             <h2 className="font-space text-xl font-bold group-hover:text-orange transition-colors">
-              {project.demo ? project.title : (
+              {project.id ? project.title : (
                 <a href={project.link} className="after:absolute after:inset-0">{project.title}</a>
               )}
             </h2>
@@ -172,7 +200,7 @@ const Work = () => {
                 </span>
               ))}
             </div>
-            {project.demo && <ProjectActions project={project} showBrief />}
+            {project.id && <ProjectActions project={project} showBrief />}
           </article>
         ))}
       </div>
