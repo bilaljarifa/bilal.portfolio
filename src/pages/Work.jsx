@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import ProjectBrief from '../components/ProjectBrief';
+import { ouchenProject } from '../data/ouchenProject';
 import ouchenStoreCover from '../assets/projects/ouchen-store.jpg';
 
 const projects = [
   {
-    title: 'Ouchen Store',
-    desc: 'A React fragrance storefront with animated campaigns, a filterable catalog, and a cart and favorites saved in the browser. Includes a demo checkout.',
+    id: 'ouchen-store',
+    ...ouchenProject.en,
     tags: ['React', 'Vite', 'Tailwind CSS'],
     year: '2026',
     cover: ouchenStoreCover,
-    coverAlt: 'Burgundy perfume bottle from the Ouchen Store amber campaign',
     demo: 'https://ri7.netlify.app/',
     link: 'https://github.com/bilaljarifa/parfume_store',
   },
@@ -58,13 +60,51 @@ const projects = [
 
 const allTags = ['All', ...new Set(projects.flatMap((p) => p.tags))];
 
+function ProjectActions({ project, showBrief = false }) {
+  return (
+    <div className="flex flex-wrap items-center gap-4 text-sm font-semibold">
+      {showBrief && (
+        <Link to={`/work?project=${project.id}`} className="rounded-md border border-border px-3 py-2 hover:border-orange">
+          Project Brief
+        </Link>
+      )}
+      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
+        Live demo <span aria-hidden="true">↗</span>
+      </a>
+      <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  );
+}
+
 const Work = () => {
   const [activeTag, setActiveTag] = useState('All');
+  const [searchParams] = useSearchParams();
+  const selected = projects.find(({ id }) => id === searchParams.get('project'));
 
   const filtered =
     activeTag === 'All'
       ? projects
       : projects.filter((p) => p.tags.includes(activeTag));
+
+  if (selected) {
+    return (
+      <article className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
+        <Link to="/work" className="inline-block text-sm font-semibold text-muted underline-offset-4 hover:text-orange hover:underline">
+          <span aria-hidden="true">←</span> All projects
+        </Link>
+        <header className="mt-5 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
+          <h1 className="font-space text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight">{selected.title}</h1>
+          <ProjectActions project={selected} />
+        </header>
+        <div className="mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+          <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
+          <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-cover" />
+        </div>
+      </article>
+    );
+  }
 
   return (
     <section className="pt-40 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
@@ -110,7 +150,7 @@ const Work = () => {
             {project.cover && (
               <img
                 src={project.cover}
-                alt={project.coverAlt}
+                alt={project.imageAlt}
                 loading="lazy"
                 decoding="async"
                 className="aspect-[3/2] w-full rounded-lg object-cover"
@@ -121,7 +161,7 @@ const Work = () => {
                 <a href={project.link} className="after:absolute after:inset-0">{project.title}</a>
               )}
             </h2>
-            <p className="text-muted text-sm leading-relaxed flex-1">{project.desc}</p>
+            <p className="text-muted text-sm leading-relaxed flex-1">{project.description ?? project.desc}</p>
             <div className="flex flex-wrap gap-2 mt-2">
               {project.tags.map((tag) => (
                 <span
@@ -132,16 +172,7 @@ const Work = () => {
                 </span>
               ))}
             </div>
-            {project.demo && (
-              <div className="flex flex-wrap items-center gap-4 pt-2 text-sm font-semibold">
-                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
-                  Live demo ?
-                </a>
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
-                  GitHub ?
-                </a>
-              </div>
-            )}
+            {project.demo && <ProjectActions project={project} showBrief />}
           </article>
         ))}
       </div>
