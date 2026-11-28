@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProjectBrief from '../components/ProjectBrief';
 import ProjectGallery from '../components/ProjectGallery';
@@ -9,13 +9,13 @@ import { ouchenGallery } from '../data/ouchenGallery';
 import studentManagerCover from '../assets/projects/student-manager.jpg';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
 import { ouchenProject } from '../data/ouchenProject';
-import ouchenStoreCover from '../assets/projects/ouchen-store.jpg';
+import ouchenStoreCover from '../assets/projects/ouchen/storefront.webp';
 
 const projects = [
   {
     id: 'ouchen-store',
     ...ouchenProject.en,
-    tags: ['JavaScript', 'React', 'Vite', 'Tailwind CSS'],
+    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
     year: '2026',
     cover: ouchenStoreCover,
     demo: 'https://ri7.netlify.app/',
@@ -77,11 +77,11 @@ function ProjectActions({ project, showBrief = false }) {
       )}
       {project.demo && (
         <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
-          Live demo <span aria-hidden="true">↗</span>
+          {project.demoLabel ?? 'Live demo'} <span aria-hidden="true">↗</span>
         </a>
       )}
       <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
-        GitHub <span aria-hidden="true">↗</span>
+        {project.sourceLabel ?? 'GitHub'} <span aria-hidden="true">↗</span>
       </a>
     </div>
   );
@@ -114,7 +114,7 @@ const Work = () => {
           <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
           {showCover && <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-contain" />}
         </div>
-        {gallery && <ProjectGallery className="mt-9" heading="Ouchen Store gallery" groups={gallery} labels={galleryLabels} />}
+        {gallery && <ProjectGallery className="mt-9" heading="Storefront demo screenshots" groups={gallery} labels={galleryLabels} />}
       </article>
     );
   }
