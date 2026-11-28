@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-bg: var(--bg);
@@ -15,6 +16,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --bg: #faf8f3;
     --text: #111111;
     --orange: #FF4D00;
@@ -25,7 +27,8 @@
     --grid-line: rgba(180, 170, 155, 0.18);
   }
   
-  .dark {
+  :root.dark {
+    color-scheme: dark;
     --bg: #111111;
     --text: #F0EDE6;
     --card-bg: #1C1C1C;

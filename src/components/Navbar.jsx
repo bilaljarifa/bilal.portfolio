@@ -84,10 +84,12 @@ const Navbar = ({ copy, language, onLanguageChange, darkMode, toggleDarkMode }) 
           <button
             type="button"
             onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-text"
+            className="grid size-9 shrink-0 place-items-center rounded-full text-text transition-colors hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange dark:hover:bg-white/10 sm:size-10"
             aria-label={copy.theme}
+            aria-pressed={darkMode}
+            title={copy.theme}
           >
-            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+            {darkMode ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
           </button>
 
           <NavLink

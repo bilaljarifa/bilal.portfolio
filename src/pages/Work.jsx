@@ -13,6 +13,7 @@ import cvBuilderCover from '../assets/projects/cv-builder.jpg';
 import ouchenStorefront from '../assets/projects/ouchen/storefront.webp';
 import ouchenCatalog from '../assets/projects/ouchen/catalog.webp';
 import chatDirectMessages from '../assets/projects/chatwithme/direct-messages.webp';
+import chatDarkMode from '../assets/projects/chatwithme/dark-mode.webp';
 import chatGroup from '../assets/projects/chatwithme/group-chat.webp';
 import chatSignIn from '../assets/projects/chatwithme/sign-in.webp';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
@@ -39,6 +40,7 @@ const projects = [
     stack: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
     gallery: [
       { image: chatDirectMessages, caption: 'chatDirectMessages' },
+      { image: chatDarkMode, caption: 'chatDarkMode' },
       { image: chatGroup, caption: 'chatGroup' },
       { image: chatSignIn, caption: 'chatSignIn' },
     ],

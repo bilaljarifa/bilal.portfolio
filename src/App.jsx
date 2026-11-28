@@ -26,17 +26,20 @@ function getSavedLanguage() {
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => document.documentElement.classList.contains('dark'));
   const [language, setLanguage] = useState(getSavedLanguage);
   const copy = translations[language];
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+  function toggleDarkMode() {
+    const next = !darkMode;
+    document.documentElement.classList.toggle('dark', next);
+    setDarkMode(next);
+    try {
+      window.localStorage.setItem('portfolio-theme', next ? 'dark' : 'light');
+    } catch {
+      // The theme control still works when storage is unavailable.
     }
-  }, [darkMode]);
+  }
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -57,7 +60,7 @@ function App() {
           language={language}
           onLanguageChange={setLanguage}
           darkMode={darkMode}
-          toggleDarkMode={() => setDarkMode(!darkMode)}
+          toggleDarkMode={toggleDarkMode}
         />
         <main className="flex-1">
           <Routes>
