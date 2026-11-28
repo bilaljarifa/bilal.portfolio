@@ -1,181 +1,168 @@
-import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProjectBrief from '../components/ProjectBrief';
 import ProjectGallery from '../components/ProjectGallery';
 import TechnologyStack from '../components/TechnologyStack';
-import { academicProjects } from '../data/academicProjects';
 import { cvProjects } from '../data/cvProjects';
-import { ouchenGallery } from '../data/ouchenGallery';
 import studentManagerCover from '../assets/projects/student-manager.jpg';
+import teacherGradebook from '../assets/projects/teacher-gradebook.png';
+import adminReview from '../assets/projects/admin-review.png';
+import studentReport from '../assets/projects/student-report.png';
+import cvBuilderCover from '../assets/projects/cv-builder.jpg';
+import ouchenStorefront from '../assets/projects/ouchen/storefront.webp';
+import ouchenCatalog from '../assets/projects/ouchen/catalog.webp';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
-import { ouchenProject } from '../data/ouchenProject';
-import ouchenStoreCover from '../assets/projects/ouchen/storefront.webp';
+import doctoralProfile from '../assets/projects/doctoral-profile.jpg';
+import doctoralArticles from '../assets/projects/doctoral-articles.jpg';
+import doctoralCommunications from '../assets/projects/doctoral-communications.jpg';
+import doctoralReenrollment from '../assets/projects/doctoral-reenrollment.jpg';
+import doctoralReceipt from '../assets/projects/doctoral-receipt.jpg';
 
 const projects = [
   {
     id: 'ouchen-store',
-    ...ouchenProject.en,
-    tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
-    year: '2026',
-    cover: ouchenStoreCover,
-    demo: 'https://ri7.netlify.app/',
     link: 'https://github.com/bilaljarifa/parfume_store',
+    demo: 'https://ri7.netlify.app/',
+    stack: ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    gallery: [
+      { image: ouchenStorefront, caption: 'ouchenStorefront' },
+      { image: ouchenCatalog, caption: 'ouchenCatalog' },
+    ],
   },
   {
     id: 'student-manager',
-    ...academicProjects['student-manager'].en,
-    tags: ['JavaScript', 'Node.js', 'Express', 'MongoDB', 'PHP', 'MySQL'],
     cover: studentManagerCover,
-    demo: 'https://studentmanager01.great-site.net/login.php',
     link: 'https://github.com/bilaljarifa/Student-Manager-js',
+    demo: 'https://studentmanager01.great-site.net/login.php',
+    stack: ['JavaScript', 'Node.js', 'Express', 'MongoDB', 'PHP', 'MySQL'],
+    gallery: [
+      { image: studentManagerCover, caption: 'signIn' },
+      { image: teacherGradebook, caption: 'gradebook' },
+      { image: adminReview, caption: 'review' },
+      { image: studentReport, caption: 'report' },
+    ],
   },
   {
     id: 'doctoral-portal',
-    ...academicProjects['doctoral-portal'].en,
-    tags: ['PHP', 'Laravel', 'Livewire', 'MySQL'],
     cover: doctoralPortalCover,
     link: 'https://github.com/bilaljarifa/plateforme_doctorale',
+    stack: ['PHP', 'Laravel', 'Livewire', 'MySQL'],
+    gallery: [
+      { image: doctoralPortalCover, caption: 'doctoralLogin' },
+      { image: doctoralProfile, caption: 'doctoralProfile' },
+      { image: doctoralArticles, caption: 'doctoralArticles' },
+      { image: doctoralCommunications, caption: 'doctoralCommunications' },
+      { image: doctoralReenrollment, caption: 'doctoralReenrollment' },
+      { image: doctoralReceipt, caption: 'doctoralReceipt' },
+    ],
   },
   {
     id: 'optiport',
-    ...cvProjects.optiport.en,
     link: cvProjects.optiport.link,
-    tags: cvProjects.optiport.stack,
-    year: '2026',
+    stack: cvProjects.optiport.stack,
   },
   {
     id: 'transmanage',
-    ...cvProjects.transmanage.en,
     link: cvProjects.transmanage.link,
-    tags: cvProjects.transmanage.stack,
+    stack: cvProjects.transmanage.stack,
   },
   {
     id: 'cv-builder',
-    title: 'CV Builder',
-    description: 'A résumé manager for creating and editing CVs, with PDF export.',
-    brief: 'CV Builder provides a web interface for creating, editing, and organizing résumé records. It stores the CVs in MySQL and exports finished documents as PDFs for sharing.',
-    tags: ['PHP', 'MySQL'],
+    cover: cvBuilderCover,
     link: 'https://github.com/bilaljarifa/cv-builder',
+    stack: ['PHP', 'MySQL'],
   },
 ];
 
-const allTags = ['All', ...new Set(projects.flatMap((project) => project.tags))];
-const galleryLabels = {
-  previewHeading: 'Image preview',
-  previousImage: 'Previous image',
-  nextImage: 'Next image',
-  backToGallery: 'Back to gallery',
-};
-
-function ProjectActions({ project, showBrief = false }) {
-  return (
-    <div className="flex flex-wrap items-center gap-4 text-sm font-semibold">
-      {showBrief && (
-        <Link to={`/work?project=${project.id}`} className="rounded-md border border-border px-3 py-2 hover:border-orange">
-          Project Brief
-        </Link>
-      )}
-      {project.demo && (
-        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-orange underline-offset-4 hover:underline">
-          {project.demoLabel ?? 'Live demo'} <span aria-hidden="true">↗</span>
-        </a>
-      )}
-      <a href={project.link} target="_blank" rel="noopener noreferrer" className="underline-offset-4 hover:underline">
-        {project.sourceLabel ?? 'GitHub'} <span aria-hidden="true">↗</span>
+const ProjectLinks = ({ project, demoLabel, sourceLabel, title }) => (
+  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+    {project.demo && (
+      <a
+        href={project.demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-md border border-border bg-bg px-3 py-2 text-sm font-semibold hover:border-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+      >
+        {demoLabel}<span className="sr-only"> · {title}</span>
+        <ArrowUpRight size={14} aria-hidden="true" />
       </a>
-    </div>
-  );
-}
+    )}
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-sm text-sm font-semibold underline decoration-border underline-offset-4 hover:decoration-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange"
+    >
+      <FaGithub size={16} aria-hidden="true" />
+      {sourceLabel}<span className="sr-only"> · {title}</span>
+      <ArrowUpRight size={14} aria-hidden="true" />
+    </a>
+  </div>
+);
 
-const Work = () => {
-  const [activeTag, setActiveTag] = useState('All');
+const Work = ({ copy }) => {
   const [searchParams] = useSearchParams();
-  const selected = projects.find(({ id }) => id === searchParams.get('project'));
-
-  const filtered =
-    activeTag === 'All'
-      ? projects
-      : projects.filter((p) => p.tags.includes(activeTag));
-
-  if (selected) {
-    const gallery = selected.id === 'ouchen-store' ? ouchenGallery('en') : null;
-    const showCover = Boolean(selected.cover && !gallery);
-    return (
-      <article className="mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-12 md:pt-40">
-        <Link to="/work" className="inline-block text-sm font-semibold text-muted underline-offset-4 hover:text-orange hover:underline">
-          <span aria-hidden="true">←</span> All projects
-        </Link>
-        <header className="mt-5 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
-          <h1 className="font-space text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight">{selected.title}</h1>
-          <ProjectActions project={selected} />
-          <TechnologyStack className="w-full" technologies={selected.tags} />
-        </header>
-        <div className={showCover ? 'mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]' : 'mt-7'}>
-          <ProjectBrief heading="Project Brief" summary={selected.brief} points={selected.briefPoints} />
-          {showCover && <img src={selected.cover} alt={selected.imageAlt} className="aspect-[3/2] w-full rounded-2xl border border-border object-contain" />}
-        </div>
-        {gallery && <ProjectGallery className="mt-9" heading="Storefront demo screenshots" groups={gallery} labels={galleryLabels} />}
-      </article>
-    );
-  }
+  const selectedId = searchParams.get('project');
+  const selected = projects.find(({ id }) => id === selectedId) ?? projects[0];
+  const { title, brief, briefPoints, demoLabel = copy.viewDemo, sourceLabel = copy.viewSource } = copy.projects[selected.id];
+  const isOptiport = selected.id === 'optiport';
+  const projectImages = selected.gallery ?? (selected.cover ? [{ image: selected.cover, caption: 'illustration' }] : []);
+  const imageGallery = projectImages.length ? [{
+    layout: selected.gallery ? 'screenshots' : 'cover',
+    items: projectImages.map(({ image, caption }) => ({
+      image,
+      caption: copy.previews[caption],
+    })),
+  }] : null;
+  const gallery = isOptiport ? copy.optiportGallery : imageGallery;
+  const galleryHeading = isOptiport ? copy.optiportHeading : selected.gallery ? copy.galleryHeading : copy.previewHeading;
 
   return (
-    <section className="pt-40 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-      <div className="text-xs font-bold tracking-[0.2em] uppercase text-orange mb-4">
-        Selected Work
-      </div>
-      <h1 className="font-space text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight tracking-tight mb-12">
-        Projects
-      </h1>
+    <section className="mx-auto grid max-w-7xl items-start gap-7 px-6 pt-28 pb-20 md:px-12 md:pt-36 lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[14rem_minmax(0,1fr)]">
+      <nav
+        aria-labelledby="project-list-heading"
+        className="rounded-2xl border border-border bg-cardBg p-4 lg:sticky lg:top-28"
+      >
+        <h2 id="project-list-heading" className="mb-3 px-2 font-space text-lg font-bold">{copy.heading}</h2>
+        <ul role="list" className="flex flex-wrap gap-1.5 lg:flex-col">
+          {projects.map(({ id }) => (
+            <li key={id}>
+              <Link
+                to={{ pathname: '/work', search: `?project=${id}` }}
+                aria-current={id === selected.id ? 'page' : undefined}
+                className="block rounded-lg border border-transparent px-3 py-2 text-sm font-semibold text-text/75 hover:bg-bg hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange aria-[current=page]:border-orange/35 aria-[current=page]:bg-bg aria-[current=page]:text-text"
+              >
+                {copy.projects[id].title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-      {/* Filter bar */}
-      <div className="flex flex-wrap gap-2.5 mb-12">
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(tag)}
-            className={`px-4 py-1.5 rounded-full border-[1.5px] text-sm font-medium transition-colors ${
-              activeTag === tag
-                ? 'border-orange text-orange bg-orange/5'
-                : 'border-border text-muted hover:border-orange hover:text-orange'
-            }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
+      <article className="min-w-0">
+        <header className="border-b border-border pb-7">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+            <h1 aria-live="polite" className="font-space text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight">
+              {title}
+            </h1>
+            <ProjectLinks project={selected} demoLabel={demoLabel} sourceLabel={sourceLabel} title={title} />
+          </div>
+          <TechnologyStack className="mt-4" technologies={selected.stack} label={copy.technologies} />
+          <ProjectBrief className="mt-7" heading={copy.briefHeading} summary={brief} points={briefPoints} />
+        </header>
 
-      {/* Project grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((project) => (
-          <article
-            key={project.title}
-            className="group relative p-7 rounded-2xl border-[1.5px] border-border bg-cardBg hover:border-orange transition-all duration-300 flex flex-col gap-4"
-          >
-            {project.year && (
-              <div className="flex justify-between items-start">
-                <span className="text-xs font-bold text-muted tracking-widest uppercase">{project.year}</span>
-                <span aria-hidden="true" className="text-orange opacity-0 group-hover:opacity-100 transition-opacity text-xl">↗</span>
-              </div>
-            )}
-            {project.cover && (
-              <img
-                src={project.cover}
-                alt={project.imageAlt}
-                loading="lazy"
-                decoding="async"
-                className="aspect-[3/2] w-full rounded-lg object-cover"
-              />
-            )}
-            <h2 className="font-space text-xl font-bold group-hover:text-orange transition-colors">
-              {project.title}
-            </h2>
-            <p className="text-muted text-sm leading-relaxed flex-1">{project.description}</p>
-            <TechnologyStack className="mt-2" technologies={project.tags} />
-            <ProjectActions project={project} showBrief />
-          </article>
-        ))}
-      </div>
+        {gallery && (
+          <ProjectGallery
+            key={selected.id}
+            className="mt-7"
+            heading={galleryHeading}
+            groups={gallery}
+            labels={copy}
+            overview={isOptiport ? copy.optiportOverview : undefined}
+          />
+        )}
+      </article>
     </section>
   );
 };

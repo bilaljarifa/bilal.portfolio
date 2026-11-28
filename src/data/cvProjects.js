@@ -4,8 +4,8 @@ export const cvProjects = {
     stack: ['TypeScript', 'React', 'Python', 'FastAPI'],
     en: {
       title: 'OPTIPORT',
-      description: 'My 2026 final-year project for ETF portfolio analysis, forecasting, and trading simulation.',
-      brief: 'I built OPTIPORT, a 2026 final-year project for analyzing and managing ETF portfolios. A React and TypeScript interface connects to a Python backend built with FastAPI.',
+      description: 'My 2026 final-year project at Université Internationale de Rabat (UIR) for ETF portfolio analysis, forecasting, and simulated trading.',
+      brief: 'I built OPTIPORT as my 2026 final-year project at Université Internationale de Rabat (UIR). It lets users analyze ETF portfolios and test strategies through simulated trading. A React and TypeScript interface connects to a Python backend built with FastAPI.',
       briefPoints: [
         ['Forecasting and news analysis', 'Implemented LSTM models for 22-day return forecasts and FinBERT to analyze sentiment in financial news.'],
         ['Portfolio optimization and risk', 'Integrated mean–variance portfolio optimization with MPT and SLSQP, with risk measures including VaR, CVaR, and beta.'],
@@ -14,8 +14,8 @@ export const cvProjects = {
     },
     fr: {
       title: 'OPTIPORT',
-      description: 'Mon projet de fin d’études 2026 consacré à l’analyse de portefeuilles ETF, à la prévision et au trading simulé.',
-      brief: 'J’ai développé OPTIPORT, un projet de fin d’études 2026 pour analyser et gérer des portefeuilles ETF. Une interface React et TypeScript est reliée à un backend Python avec FastAPI.',
+      description: 'Mon projet de fin d’études 2026 à l’Université Internationale de Rabat (UIR), consacré à l’analyse de portefeuilles ETF, à la prévision et au trading simulé.',
+      brief: 'J’ai développé OPTIPORT dans le cadre de mon projet de fin d’études 2026 à l’Université Internationale de Rabat (UIR). La plateforme permet d’analyser des portefeuilles ETF et de tester des stratégies de trading en simulation. L’interface React et TypeScript communique avec un backend Python développé avec FastAPI.',
       briefPoints: [
         ['Prévision et analyse de l’actualité', 'J’ai implémenté des modèles LSTM pour les prévisions de rendement à 22 jours et utilisé FinBERT pour analyser le sentiment des actualités financières.'],
         ['Optimisation et mesure des risques', 'J’ai intégré l’optimisation moyenne-variance avec MPT et SLSQP et les mesures de risque VaR, CVaR et bêta.'],

@@ -1,0 +1,78 @@
+import { ouchenProject } from '../data/ouchenProject';
+import { academicProjects } from '../data/academicProjects';
+import { optiportGallery } from '../data/optiportGallery';
+import { profileCopy } from '../data/profile';
+import { cvProjects } from '../data/cvProjects';
+
+export default {
+  title: profileCopy.en.title,
+  nav: {
+    home: 'Home',
+    about: 'About',
+    skills: 'Skills',
+    work: 'Projects',
+    experience: 'Experience',
+    contact: 'Contact',
+    language: 'Language',
+    theme: 'Toggle dark mode',
+    menu: 'Navigation menu',
+    hire: 'Hire Me',
+    downloadCv: 'Download CV',
+  },
+  home: {
+    headline: ['FULL STACK', 'DEVELOPER'],
+    description: profileCopy.en.intro,
+    viewWork: 'View My Work',
+    downloadCv: 'Download CV',
+    greeting: 'Hi! I Am',
+    pauseTechnologies: 'Pause scrolling technologies',
+    playTechnologies: 'Resume scrolling technologies',
+  },
+  about: profileCopy.en.about,
+  work: {
+    heading: 'Projects',
+    briefHeading: 'Project Brief',
+    technologies: 'Technologies used',
+    galleryHeading: 'Demo Screenshots',
+    previewHeading: 'Project Preview',
+    backToGallery: 'Back to gallery',
+    viewDemo: 'Live demo',
+    viewSource: 'View on GitHub',
+    previousImage: 'Previous image',
+    nextImage: 'Next image',
+    optiportHeading: 'Optiport walkthrough',
+    optiportGallery: optiportGallery('en'),
+    optiportOverview: {
+      instructions: 'Select any thumbnail for a larger image and an explanation. The walkthrough uses simulated accounts, ETF prices archived through April 1, 2020, and illustrative news headlines and chat.',
+      navigationLabel: 'Walkthrough topics',
+      fullImageLabel: 'Open full-size image',
+    },
+    previews: {
+      ouchenStorefront: 'Storefront homepage',
+      ouchenCatalog: 'Product catalog and filters',
+      signIn: 'Demo sign-in',
+      gradebook: 'Teacher gradebook',
+      review: 'Administrator review',
+      report: 'Student report card',
+      illustration: 'Project illustration',
+      doctoralLogin: 'Google sign-in',
+      doctoralProfile: 'Doctoral student profile',
+      doctoralArticles: 'Research articles',
+      doctoralCommunications: 'Conference presentations',
+      doctoralReenrollment: 'Annual re-enrollment',
+      doctoralReceipt: 'Re-enrollment receipt',
+    },
+    projects: {
+      'ouchen-store': ouchenProject.en,
+      optiport: cvProjects.optiport.en,
+      transmanage: cvProjects.transmanage.en,
+      'student-manager': academicProjects['student-manager'].en,
+      'doctoral-portal': academicProjects['doctoral-portal'].en,
+      'cv-builder': {
+        title: 'CV Builder',
+        description: 'A résumé manager for creating and editing CVs, with PDF export for sharing finished documents.',
+        brief: 'CV Builder provides a web interface for creating, editing, and organizing résumé records. It stores the CVs in MySQL and exports finished documents as PDFs for sharing.',
+      },
+    },
+  },
+};

@@ -1,0 +1,32 @@
+@media (prefers-reduced-motion: no-preference) {
+  .home-tech-window {
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent);
+  }
+
+  .home-tech-track {
+    display: flex;
+    width: max-content;
+    animation: home-tech-scroll 18s linear infinite;
+  }
+
+  .home-tech-list {
+    flex: none;
+    flex-wrap: nowrap;
+    padding-inline-end: 0.75rem;
+  }
+
+  .home-tech-copy {
+    display: flex;
+  }
+
+  .home-tech-window[data-paused="true"] .home-tech-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes home-tech-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
