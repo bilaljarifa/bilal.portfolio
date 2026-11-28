@@ -16,6 +16,10 @@ import chatDirectMessages from '../assets/projects/chatwithme/direct-messages.we
 import chatDarkMode from '../assets/projects/chatwithme/dark-mode.webp';
 import chatGroup from '../assets/projects/chatwithme/group-chat.webp';
 import chatSignIn from '../assets/projects/chatwithme/sign-in.webp';
+import chatInterests from '../assets/projects/chatwithme/interests.webp';
+import chatFriendDiscovery from '../assets/projects/chatwithme/friend-discovery.webp';
+import chatFriendRequests from '../assets/projects/chatwithme/friend-requests.webp';
+import chatThemeSettings from '../assets/projects/chatwithme/theme-settings.webp';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
 import doctoralProfile from '../assets/projects/doctoral-profile.jpg';
 import doctoralArticles from '../assets/projects/doctoral-articles.jpg';
@@ -43,6 +47,10 @@ const projects = [
       { image: chatDarkMode, caption: 'chatDarkMode' },
       { image: chatGroup, caption: 'chatGroup' },
       { image: chatSignIn, caption: 'chatSignIn' },
+      { image: chatInterests, caption: 'chatInterests' },
+      { image: chatFriendDiscovery, caption: 'chatFriendDiscovery' },
+      { image: chatFriendRequests, caption: 'chatFriendRequests' },
+      { image: chatThemeSettings, caption: 'chatThemeSettings' },
     ],
   },
   {
