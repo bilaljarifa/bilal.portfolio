@@ -12,6 +12,9 @@ import studentReport from '../assets/projects/student-report.png';
 import cvBuilderCover from '../assets/projects/cv-builder.jpg';
 import ouchenStorefront from '../assets/projects/ouchen/storefront.webp';
 import ouchenCatalog from '../assets/projects/ouchen/catalog.webp';
+import chatDirectMessages from '../assets/projects/chatwithme/direct-messages.webp';
+import chatGroup from '../assets/projects/chatwithme/group-chat.webp';
+import chatSignIn from '../assets/projects/chatwithme/sign-in.webp';
 import doctoralPortalCover from '../assets/projects/doctoral-portal.jpg';
 import doctoralProfile from '../assets/projects/doctoral-profile.jpg';
 import doctoralArticles from '../assets/projects/doctoral-articles.jpg';
@@ -28,6 +31,16 @@ const projects = [
     gallery: [
       { image: ouchenStorefront, caption: 'ouchenStorefront' },
       { image: ouchenCatalog, caption: 'ouchenCatalog' },
+    ],
+  },
+  {
+    id: 'chatwithme',
+    link: 'https://github.com/bilaljarifa/Chat-app-Websites',
+    stack: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
+    gallery: [
+      { image: chatDirectMessages, caption: 'chatDirectMessages' },
+      { image: chatGroup, caption: 'chatGroup' },
+      { image: chatSignIn, caption: 'chatSignIn' },
     ],
   },
   {

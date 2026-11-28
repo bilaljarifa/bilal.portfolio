@@ -1,5 +1,6 @@
 import { ouchenProject } from '../data/ouchenProject';
 import { academicProjects } from '../data/academicProjects';
+import { chatWithMeProject } from '../data/chatWithMeProject';
 import { optiportGallery } from '../data/optiportGallery';
 import { profileCopy } from '../data/profile';
 import { cvProjects } from '../data/cvProjects';
@@ -50,6 +51,9 @@ export default {
     previews: {
       ouchenStorefront: 'Storefront homepage',
       ouchenCatalog: 'Product catalog and filters',
+      chatDirectMessages: 'Direct conversation',
+      chatGroup: 'Group conversation',
+      chatSignIn: 'Account sign-in',
       signIn: 'Demo sign-in',
       gradebook: 'Teacher gradebook',
       review: 'Administrator review',
@@ -64,6 +68,7 @@ export default {
     },
     projects: {
       'ouchen-store': ouchenProject.en,
+      chatwithme: chatWithMeProject.en,
       optiport: cvProjects.optiport.en,
       transmanage: cvProjects.transmanage.en,
       'student-manager': academicProjects['student-manager'].en,
